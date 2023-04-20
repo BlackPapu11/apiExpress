@@ -1,5 +1,6 @@
 const {httpError} = require('../helpers/handleError')
 const userModel = require('../models/users')
+const { encrypt } = require("../helpers/handleBCrypt")
 
 const getItems = async ( req, res ) =>{
     try{
@@ -16,9 +17,10 @@ const getItem = ( req, res ) =>{
 
 const createItem = async ( req, res ) =>{
     try{
-        const { name, password, email } = req.body
+        const { name,lastname,surname,phone,ext_phone,name_photo, password, email, role } = req.body
+        const passwordHash = await encrypt(password)
         const resDetail = await userModel.create({
-            name, password, email
+            name, lastname, surname, phone, ext_phone, name_photo, password:passwordHash, email, role
         })
         res.send({ data: resDetail})
     }catch(e){

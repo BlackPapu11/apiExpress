@@ -4,12 +4,13 @@ const router = express.Router()
 const checkAuth = require('../middleware/auth')
 const checkRoleAuth = require('../middleware/roleAuth')
 const { getItems, getItem, createItem, updateItem, deleteItem } = require('../controllers/users')
+const { validateCreate } = require('../validators/users')
 
-router.get('/',checkAuth,checkRoleAuth(['user']), getItems)
+router.get('/',checkAuth,checkRoleAuth(['Validador']), getItems)
 
-router.get('/:id',checkAuth, checkRoleAuth(['admin']), getItem)
+router.get('/:id',checkAuth, checkRoleAuth(['Administrador']), getItem)
 
-router.post('/',checkAuth, createItem)
+router.post('/',checkAuth,validateCreate, createItem)
 
 router.patch('/:id',checkAuth, updateItem)
 
