@@ -6,9 +6,9 @@ const checkRoleAuth = require('../middleware/roleAuth')
 const { getItems, getItem, createItem, updateItem, deleteItem } = require('../controllers/users')
 const { validateCreate } = require('../validators/users')
 
-router.get('/',checkAuth,checkRoleAuth(['Validador']), getItems)
+router.get('/', getItems)
 
-router.get('/:id',checkAuth, checkRoleAuth(['Administrador']), getItem)
+router.get('/:id',checkAuth, checkRoleAuth(['Validador']), getItem)
 
 router.post('/',checkAuth,validateCreate, createItem)
 
