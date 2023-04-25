@@ -33,13 +33,23 @@ const loginCtrl = async (req, res) =>{
     }
 }
 
+const changePassword = async ( req , res ) => {
+    try{
+        const { password, confirmPassword, email } = req.body
+        const user = await userModel.findOne({ email })
+
+    }catch(e){
+        httpError(res,e)
+    }
+}
+
 const transporter = nodemailer.createTransport({
     host:'smtp.gmail.com',
     port:587,
     service: 'gmail',
     auth:{
         user:'cdsiteinformation@gmail.com',
-        pass: 'vpuxnhtwozajirof'
+        pass: 'vpuxnhtwozaji1234'
     }
 })
 
@@ -67,7 +77,6 @@ const registerCtrl = async (req, res) => {
         subject: 'CDSITE - Recover Password',
         html: `<!DOCTYPE html>
         <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
-        
         <head>
             <title></title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -408,4 +417,4 @@ const registerCtrl = async (req, res) => {
     })
 }
 
-module.exports = { loginCtrl, registerCtrl }
+module.exports = { loginCtrl, registerCtrl, changePassword }
